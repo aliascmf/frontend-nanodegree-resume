@@ -140,9 +140,9 @@ var projects = {
 			"dates":"May 2008 - November 2008",
 			"description":"insert resume description",
 			"images":[
-				"http://rent2military.com/",
-				"http://rent2military.com/roommatesearch.aspx",
-				"http://rent2military.com/postlisting.aspx",
+				"images/rent2militaryHome.png",
+				"images/rent2militaryRoommateSearch.png",
+				"images/rent2militaryPostListings.png",
 			]
 		},
 		{
@@ -150,7 +150,8 @@ var projects = {
 			"dates":"July 2015 - August 2015",
 			"description":"Responsive web design",
 			"images":[
-				"https://github.com/aliascmf/P1",
+				"images/P1-wide.png",
+				"images/P1-phone.png"
 			]
 		}
 	],
@@ -161,7 +162,7 @@ var projects = {
 			projectEntry = projectEntry + HTMLprojectDates.replace("%data%", project.dates);
 			projectEntry = projectEntry + HTMLprojectDescription.replace('%data%', project.description);
 			$.each(project.images, function(key,image) {
-				projectEntry = projectEntry +  HTMLprojectImage.replace("%data%", project.image);
+				projectEntry = projectEntry +  HTMLprojectImage.replace("%data%", image);
 			});
 			var projectStart = $(HTMLprojectStart).html(projectEntry);
 			$("#projects").append(projectStart);
