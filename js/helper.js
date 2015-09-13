@@ -65,7 +65,7 @@ The International Name challenge in Lesson 2 where you'll create a function that
 $(document).ready(function() {
   $('button').click(function() {
     var iName = inName() || function(){};
-    $('#name').html(iName);  
+    $('#name').html(iName);
   });
 });
 
@@ -85,7 +85,7 @@ function logClicks(x,y) {
 }
 
 $(document).click(function(loc) {
-  // your code goes here!
+  logClicks(loc.clientX,loc.clientY);
 });
 
 
@@ -109,9 +109,9 @@ function initializeMap() {
     disableDefaultUI: true
   };
 
-  /* 
+  /*
   For the map to be displayed, the googleMap var must be
-  appended to #mapDiv in resumeBuilder.js. 
+  appended to #mapDiv in resumeBuilder.js.
   */
   map = new google.maps.Map(document.querySelector('#map'), mapOptions);
 
@@ -149,7 +149,7 @@ function initializeMap() {
   about a single location.
   */
   function createMapMarker(placeData) {
-
+console.log(placeData);
     // The next lines save location data from the search result object to local variables
     var lat = placeData.geometry.location.lat();  // latitude from the place service
     var lon = placeData.geometry.location.lng();  // longitude from the place service
@@ -160,19 +160,29 @@ function initializeMap() {
     var marker = new google.maps.Marker({
       map: map,
       position: placeData.geometry.location,
-      title: name
+      title: placeData.formatted_address
     });
-
+    var dcContent = '<h4 >The license plates read <b>Taxation Without Representation</b></h4>'+
+      '<div ><p><b>Washington, DC</b>, is the capital of the USA.  Ironically, in the cradle of modern democracy, ' +
+      'Washingtonians are not afforded the right to vote in Congressional elections.'+
+      'DC continues to work towards earning its statehood through the work of their representative, Eleanor Holmes Norton' +
+      'who is only allowed to vote in committee and not on the House floor. Other initiatives to grant DC her statehood ' +
+      'include retroceding the land back to Maryland.</p>'
+      '<p>Attribution: Retrocession, <a href="https://en.wikipedia.org/wiki/District_of_Columbia_retrocession">'+
+      'https://en.wikipedia.org/wiki/District_of_Columbia_retrocession</a> '+
+      '</p>'+
+      '</div>';
+    var contentString = placeData.formatted_address== 'Washington, DC, USA' ? dcContent: '<h4>' + placeData.formatted_address + '</h4?';
     // infoWindows are the little helper windows that open when you click
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-      content: name
+      content: contentString
     });
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
-      // your code goes here!
+      infoWindow.open(map, marker);
     });
 
     // this is where the pin actually gets added to the map.
@@ -235,11 +245,11 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
+window.addEventListener('resize', function(e) {
   //Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+map.fitBounds(mapBounds);
+});
