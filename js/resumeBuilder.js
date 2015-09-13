@@ -34,7 +34,6 @@ var bio = {
 };
 var runBio =bio.display;
 runBio();
-
 var education = {
 	"schools" : [
 		{
@@ -157,7 +156,6 @@ var projects = {
 	],
 	"display": function() {
 		$.each(projects.projects, function(key, project) {
-
 			var projectEntry = HTMLprojectTitle.replace("%data%", project.title);
 			projectEntry = projectEntry + HTMLprojectDates.replace("%data%", project.dates);
 			projectEntry = projectEntry + HTMLprojectDescription.replace('%data%', project.description);
@@ -172,5 +170,3 @@ var projects = {
 var projectFunc = projects.display;
 projectFunc();
 $("#mapDiv").append(googleMap);
-
-
