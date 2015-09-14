@@ -26,14 +26,13 @@ var bio = {
 			HTMLskillsList= HTMLskillsList + HTMLskills.replace("%data%", value);
 		});
 		$("#header").prepend(formattedName + formattedRole);
-		$("#topContacts").append(formattedEmail + formattedMobile + formattedGitHub + formattedTwitter + formattedLocation);
+		$("#topContacts, #footerContacts").append(formattedEmail + formattedMobile + formattedGitHub + formattedTwitter + formattedLocation);
 		$("#header").append(formattedpic + formattedWelcomeMsg);
 		$("#header").append(HTMLskillsStart);
 		$("#skills").html(HTMLskillsList);
 	  }
 };
-var runBio =bio.display;
-runBio();
+bio.display();
 var education = {
 	"schools" : [
 		{
@@ -84,14 +83,13 @@ var education = {
 				onlineCourseEntry=onlineCourseEntry + HTMLonlineDates.replace("%data%",onlineCourse.date);
 				 var onlineURL=HTMLonlineURL.replace("#", onlineCourse.url);
 				 onlineURL=onlineURL.replace("%data%", onlineCourse.url);
-				 onlineCourseEntry=onlineCourseEntry + onlineURL
+				 onlineCourseEntry=onlineCourseEntry + onlineURL;
 				 var schoolStart =$(HTMLschoolStart).html(onlineCourseEntry);
 				$("#education").append(schoolStart);
 			});
 	}
-}
-var educationFunc = education.display;
-educationFunc();
+};
+education.display();
 var work = {
 	"jobs":[
 	{
@@ -130,8 +128,7 @@ var work = {
 		});
 	}
 }
-var workFunc = work.display;
-workFunc();
+work.display();
 var projects = {
 	"projects": [
 		{
@@ -166,7 +163,6 @@ var projects = {
 			$("#projects").append(projectStart);
 		});
 	}
-}
-var projectFunc = projects.display;
-projectFunc();
+};
+projects.display();
 $("#mapDiv").append(googleMap);
